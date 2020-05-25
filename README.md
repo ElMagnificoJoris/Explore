@@ -13,13 +13,21 @@ php artisan ui vue --auth;
 
 // blog
 composer require "webdevetc/blogetc";
--- go edit the database configuration in the .env file
+-- go edit the database configuration in the .env file, exemple:
+-------------------
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=my_password
+-------------------
+-- and don't forget to open the database, then continue:
 php artisan vendor:publish --provider="WebDevEtc\BlogEtc\BlogEtcServiceProvider";
 php artisan vendor:publish --tag=laravel-fulltext;
 php artisan migrate;
 mkdir public/blog_images;
-
-// add this to /app/User.php
+-- add this to /app/User.php :
 --------------------------------
  /**
      * Required for the WebDevEtc\BlogEtc package.
@@ -48,7 +56,7 @@ mkdir public/blog_images;
         // otherwise return false, so they have no access
         // to the admin panel (but can still view posts)
 
-        return false;
+        return true; // FOR NOW -- change to false when the admin accounts are set up
     }
 ---------------------------------
 
@@ -56,3 +64,5 @@ mkdir public/blog_images;
 chmod -R o+w storage;
 chmod o+w bootstrap/cache;
 chmod o+w public/blog_images;
+
+// then everything is set up! go to the public file in your {dest} file (example: http://localhost/~Flavien/{dest}/public) and the welcome page should appear.
