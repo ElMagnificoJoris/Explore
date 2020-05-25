@@ -65,6 +65,6 @@ class User extends Authenticatable
         // otherwise return false, so they have no access
         // to the admin panel (but can still view posts)
 
-        return false;
+        return true;
     }
 }
