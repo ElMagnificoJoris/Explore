@@ -62,6 +62,11 @@
 
 
                     <li class='nav-item px-2'><a class='nav-link' href='{{route("blogetc.index")}}'>Blog home</a></li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
 
 
                     <li class="nav-item ">
