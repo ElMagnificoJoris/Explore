@@ -25,7 +25,7 @@
     }
 </script>
 <div class="form-group">
-    <label for="category_category_name">Category Name</label>
+    <label for="category_category_name">Nom</label>
 
     <input type="text"
            class="form-control"
@@ -37,12 +37,12 @@
            value="{{old("category_name",$category->category_name)}}"
     >
 
-    <small id="category_category_name_help" class="form-text text-muted">The name of the category</small>
+    <small id="category_category_name_help" class="form-text text-muted">Le nom de la catégorie</small>
 </div>
 
 
 <div class="form-group">
-    <label for="category_slug">Category slug</label>
+    <label for="category_slug">Lien web</label>
     <input
             maxlength='100'
             pattern="[a-zA-Z0-9-]+"
@@ -57,16 +57,16 @@
     >
 
     <small id="category_slug_help" class="form-text text-muted">
-        Letters, numbers, dash only. The slug
-        i.e. {{route("blogetc.view_category","")}}/<u><em>this_part</em></u>. This must be unique (two categories can't
-        share the same slug).
+        Caractères autorisés: lettres, nombres et tirets. Le lien, 
+        (ex: {{route("blogetc.view_category","")}}/<u><em>cette_partie</em></u>) Se doit d'être unique (deux catégories ne peuvent
+        pas partager le même URL).
 
     </small>
 </div>
 
 
 <div class="form-group">
-    <label for="category_description">Category Description (optional)</label>
+    <label for="category_description">Description de la catégorie (optionnel)</label>
     <textarea name='category_description'
               class='form-control'
     id='category_description'>{{old("category_description",$category->category_description)}}</textarea>

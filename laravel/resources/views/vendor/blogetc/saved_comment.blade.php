@@ -2,13 +2,13 @@
 @section("content")
 
     <div class='text-center'>
-        <h3>Thanks! Your comment has been saved!</h3>
+        <h3>Merci! Votre commentaire a été sauvegardé!</h3>
 
         @if(!config("blogetc.comments.auto_approve_comments",false) )
-            <p>After an admin user approves the comment, it'll appear on the site!</p>
+            <p>Une fois qu'un Administrateur aura validé votre commentaire, il apparaîtra sur le site!</p>
         @endif
 
-        <a href='{{$blog_post->url()}}' class='btn btn-primary'>Back to blog post</a>
+        <a href='{{$blog_post->url()}}' class='btn btn-primary'>Retour aux posts</a>
     </div>
 
 @endsection

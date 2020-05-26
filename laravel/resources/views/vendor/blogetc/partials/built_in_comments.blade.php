@@ -7,10 +7,10 @@
             {{$comment->author()}}
 
             @if(config("blogetc.comments.ask_for_author_website") && $comment->author_website)
-                (<a href='{{$comment->author_website}}' target='_blank' rel='noopener'>website</a>)
+                (<a href='{{$comment->author_website}}' target='_blank' rel='noopener'>site internet</a>)
             @endif
 
-            <span class="float-right" title='{{$comment->created_at}}'><small>{{$comment->created_at->diffForHumans()}}</small></span>
+            <span class="float-right" title='{{$comment->created_at}}'><small>Il y a {{substr($comment->created_at->diffForHumans(), 0, strlen($comment->created_at->diffForHumans())-4)}}</small></span>
         </div>
         <div class="card-body bg-white">
             <p class="card-text">{!! nl2br(e($comment->comment))!!}</p>
@@ -22,7 +22,7 @@
 
 
 @empty
-    <div class='alert alert-info'>No comments yet! Why don't you be the first?</div>
+    <div class='alert alert-info'>Aucun commentaires</div>
 @endforelse
 
 @if(count($comments)> config("blogetc.comments.max_num_of_comments_to_show",500) - 1)
