@@ -1,0 +1,168 @@
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto
+}
+
+.mySlides {
+    display: none;
+  height: 400px;
+
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: #222428;
+    font-weight: bold;
+    font-size: 30px;
+    transition: .6s ease;
+    border-radius: 0 3px 3px 0
+}
+
+.next {
+    right: 0px;
+    border-radius: 3px 3px 3px 3px
+}
+
+.prev {
+    left: 0px;
+    border-radius: 3px 3px 3px 3px
+}
+
+.prev:hover,
+.next:hover {
+    color: #f2f2f2;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding-top: 12px;
+  padding-bottom: 12px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(20,20,20,0.5);
+}
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color .6s ease
+}
+
+.active,
+.dot:hover {
+    background-color: #717171
+}
+
+#sld{
+  height: 400px;
+}
+
+.divInf{
+  width: 1000px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+.contentInf{
+  width: 975;
+  padding: 0px 25px 0px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contentInf div{
+  width: 425px;
+  margin-bottom: 25px;
+}
+
+.contentInf div img{
+  width: 425px;
+}
+
+.txtInf{
+  font-size: 2em;
+}
+
+.pied{
+  display: flex;
+  flex-direction: column;
+}
+
+.piedRes a img{
+  width: 25px;
+  height: 25px;
+  margin: 0 5px 0 5px;
+}
+
+.contain{
+  width: 1000px;
+  background-color: rgba(255,255,255,0.5);
+  padding: 25px 0 0 0;
+}
+
+.blank{
+  width:400px;
+}
+
+main{
+  display: flex;
+  justify-content: space-around;
+  background-image: url("../images/peak.jpg");
+}
+
+#logo{
+  width: 50px;
+  height: 50px;
+  position: relative;
+  bottom: 7px;
+  right: 1px;
+
+}
+
+#logoCont{
+  width: 50px;
+  height: 50px;
+  border: solid black;
+  border-radius: 50%;
+  overflow: hidden;
+  border-width: 0.1em;
+}
+
+.container{
+  width: 1140px;
+}
