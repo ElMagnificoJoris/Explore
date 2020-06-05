@@ -3388,9 +3388,7 @@ input[type=button].btn-block {
   }
 }
 
-.fade:not(.show) {
-  opacity: 0;
-}
+
 
 .collapse:not(.show) {
   display: none;
@@ -10932,4 +10930,3 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
-

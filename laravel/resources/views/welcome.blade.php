@@ -1,21 +1,22 @@
-@extends("layouts.app",['title'=>"laravel"])
+@extends("layouts.home",['title'=>"laravel"])
 @section("content")
 
 
-
-
+<div class=blank>
+</div>
+<div class="contain">
 <div class="slideshow-container">
 <div class="slideshow-inner">
 <div class="mySlides fade">
-<img src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;' alt="sally lightfoot crab"/>
+<img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;' alt="sally lightfoot crab"/>
     <div class="text">Sally Lightfoot Crab</div>
   </div>
 <div class="mySlides fade">
-<img  src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;' alt="fighting nazca boobies"/>
+<img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;' alt="fighting nazca boobies"/>
     <div class="text">A scuffle between two Nazca Boobies</div>
   </div>
 <div class="mySlides fade">
-<img  src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;' alt="otovalo waterfall"/>
+<img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;' alt="otovalo waterfall"/>
     <div class="text">A waterfall discovered on a hike in Otovalo</div>
   </div>
 </div>
@@ -30,5 +31,33 @@
   <span class="dot" onclick='currentSlide(3)'></span>
 </div>
 
-<img  src="{{ asset('images/DSCN1619.JPG') }}"/>
+<div class="divInf">
+  <div class="contentInf">
+    <div class="txtInf">
+      Explore est une entreprise 100% grenobloise qui vous accompagnent dans la promotion de votre produit !
+    </div>
+    <div class="imgInf">
+      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+    </div>
+  </div>
+  <div class="contentInf">
+    <div class="imgInf">
+      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+    </div>
+    <div class="txtInf">
+      fsefsefsefef
+    </div>
+  </div>
+  <div class="contentInf">
+    <div class="txtInf">
+      fesfesfe
+    </div>
+    <div class="imgInf">
+      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+    </div>
+  </div>
+</div>
+</div>
+<div class=blank>
+</div>
 @endsection
