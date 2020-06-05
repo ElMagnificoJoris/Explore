@@ -61,18 +61,13 @@
                     <!-- Authentication Links -->
 
 
-                    <li class='nav-item px-2'><a class='nav-link' href='{{route("blogetc.index")}}'>Blog home</a></li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
+                    <li class='nav-item px-2'><a class='nav-link' href='{{route("blogetc.index")}}'>Voir les blogs</a></li>
 
 
                     <li class="nav-item ">
                         <a id="" class="nav-link " href="#" role="button"
                            aria-haspopup="true" aria-expanded="false" >
-                            Logged in as {{ Auth::user()->name }}
+                            Connecté en tant que {{ Auth::user()->name }}
                         </a>
 
                     </li>
@@ -93,7 +88,7 @@
 
                     @if (isset($errors) && count($errors))
                         <div class="alert alert-danger">
-                            <b>Sorry, but there was an error:</b>
+                            <b>Désolé, mais il y a eu une erreur:</b>
                             <ul class='m-0'>
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>

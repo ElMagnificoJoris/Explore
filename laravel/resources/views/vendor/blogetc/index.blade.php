@@ -7,7 +7,7 @@
         <div class='col-sm-12 blogetc_container'>
             @if(\Auth::check() && \Auth::user()->canManageBlogEtcPosts())
                 <div class="text-center">
-                        <p class='mb-1'>You are logged in as a blog admin user.
+                        <p class='mb-1'>Vous êtes connecté en tant qu'Admin.
                             <br>
 
                             <a href='{{route("blogetc.admin.index")}}'
@@ -15,7 +15,7 @@
 
                                 <i class="fa fa-cogs" aria-hidden="true"></i>
 
-                                Go To Blog Admin Panel</a>
+                                Aller au panel Admin</a>
 
 
                         </p>
@@ -24,7 +24,7 @@
 
 
             @if(isset($blogetc_category) && $blogetc_category)
-                <h2 class='text-center'>Viewing Category: {{$blogetc_category->category_name}}</h2>
+                <h2 class='text-center'>Catégorie: {{$blogetc_category->category_name}}</h2>
 
                 @if($blogetc_category->category_description)
                     <p class='text-center'>{{$blogetc_category->category_description}}</p>
@@ -36,7 +36,7 @@
             @forelse($posts as $post)
                 @include("blogetc::partials.index_loop")
             @empty
-                <div class='alert alert-danger'>No posts</div>
+                <div class='alert alert-danger'>Aucun post</div>
             @endforelse
 
             <div class='text-center  col-sm-4 mx-auto'>

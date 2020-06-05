@@ -2,9 +2,9 @@
 @section("content")
 
 
-    <h5>Admin - Upload Images</h5>
+    <h5>Admin - Poster une image</h5>
 
-    <p>Upload was successful.</p>
+    <p>L'image a été validée!</p>
 
     @forelse($images as $image)
 
@@ -26,7 +26,7 @@
         </div>
 
     @empty
-        <div class='alert alert-danger'>No image was processed</div>
+        <div class='alert alert-danger'>Aucune image n'a été traitée.</div>
     @endforelse
 
 

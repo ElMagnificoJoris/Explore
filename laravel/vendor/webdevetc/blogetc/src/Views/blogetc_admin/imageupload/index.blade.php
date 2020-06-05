@@ -2,11 +2,9 @@
 @section("content")
 
 
-    <h5>Admin - Uploaded Images</h5>
+    <h5>Admin - Images</h5>
 
-    <p>You can view all previously uploaded images here.</p>
-
-    <p>It includes one thumbnail per photo - the smallest image is selected.</p>
+    <p>Vous pouvez voir toutes les images postées ici.</p>
 
     <script>
 
@@ -27,7 +25,7 @@
                     <h3>Image ID: {{$uploadedPhoto->id}}: {{$uploadedPhoto->image_title ?? "Untitled Photo"}}</h3>
                     <h4>
                         <small title='{{$uploadedPhoto->created_at}}'>
-                            Uploaded {{$uploadedPhoto->created_at->diffForHumans()}}</small>
+                            Postée il y a {{substr($uploadedPhoto->created_at->diffForHumans(), 0, strlen($uploadedPhoto->created_at->diffForHumans())-4)}}</small>
                     </h4>
 
             <div class='row'>
@@ -46,7 +44,7 @@
                                 x {{$file['h']}}:</h6>
                             <p class='text-center'><a
                                         href='{{asset(     config("blogetc.blog_upload_dir") . "/". $file['filename'])}}'
-                                        target='_blank'>[link]</a> / <span
+                                        target='_blank'>[lien]</a> / <span
                                         class='btn btn-sm btn-primary'
                                         style='cursor: zoom-in;'
                                         onclick='show_uploaded_file_row("{{$id}}","{{asset(     config("blogetc.blog_upload_dir") . "/". $file['filename'])}}")'>show</span>
@@ -64,7 +62,7 @@
                         <div class='col-md-6 {{$id}}' style='display:none;'>
 
                             <div style=''>
-                                <small class='text-muted'>img tag</small>
+                                <small class='text-muted'>img balise</small>
                                 <input type='text' readonly='readonly' class='form-control'
                                        value='{{"<img src='".asset(     config("blogetc.blog_upload_dir") . "/". $file['filename'])."' alt='" . e($uploadedPhoto->image_title) . "' >"}}'>
                             </div>
@@ -96,7 +94,7 @@
 
                     @else
 
-                        <div class='alert alert-danger'>No image found</div>
+                        <div class='alert alert-danger'>Aucune image trouvée.</div>
                     @endif
 
 

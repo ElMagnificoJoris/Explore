@@ -2,8 +2,8 @@
 @section("content")
 
 
-    <div class='alert alert-success'><b>Deleted that post</b>
-        <br/><a href='{{ route('blogetc.admin.index') }}' class='btn btn-primary '>Back to posts overview</a></div>
+    <div class='alert alert-success'><b>Post supprimé</b>
+        <br/><a href='{{ route('blogetc.admin.index') }}' class='btn btn-primary '>Revenir au panel Admin</a></div>
 
     <?php
     $images_to_delete = [];
@@ -15,14 +15,14 @@
     }?>
 
     @if(count($images_to_delete))
-        <p>However, the following images were <strong>not</strong> deleted:</p>
+        <p>En revanche, ces images n'ont <strong>pas</strong> été supprimées:</p>
 
         <table class='table'>
             <thead>
             <tr>
-                <th>Image/link</th>
-                <th>Filename / filesize</th>
-                <th>Full location</th>
+                <th>Image/lien</th>
+                <th>Nom / taille</th>
+                <th>location complète</th>
             </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
 
                     <td class='text-center'><a
                                 href='{{asset(config("blogetc.blog_upload_dir","blog_images")."/".$deletedPost->$image_size) }}'
-                                target='_blank' class='btn btn-primary m-1'>view</a>
+                                target='_blank' class='btn btn-primary m-1'>voir</a>
 
                         <img src='{{asset(config("blogetc.blog_upload_dir","blog_images")."/".$deletedPost->$image_size) }}'
                              width=100>
@@ -60,14 +60,14 @@
             </tbody>
         </table>
 
-        <p>If you want those images deleted please go and manually delete them.</p>
+        <p>Si vous voulez supprimer ces images, sélectionnez les et faites le manuellement.</p>
     @endif
 
 
     <hr class='my-5 py-5'>
 
-    <p>Was deleting it a mistake? Here is some of the output from the deleted post, as JSON. Please use a JSON viewer to
-        retrieve the information.</p>
+    <p>Oups, c'était une erreur? Ci-dessous se trouve les données du post sous format JSON, vous pouvez utiliser
+         un logiciel d'analyse de JSON pour récupérer les informations.</p>
 
     <textarea readonly class='form-control'>{{ $deletedPost->toJson() }}</textarea>
 @endsection

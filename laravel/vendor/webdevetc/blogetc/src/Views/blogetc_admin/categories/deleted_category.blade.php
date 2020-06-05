@@ -2,6 +2,6 @@
 @section("content")
 
 
-<div class='alert alert-success'><b>Deleted that category</b></div>
+<div class='alert alert-success'><b>Catégorie supprimée.</b></div>
 
 @endsection
