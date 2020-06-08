@@ -1,67 +1,73 @@
-@php
-    /** @var \WebDevEtc\BlogEtc\Models\Comment[] $comments */
-@endphp
-@extends('blogetc_admin::layouts.admin_layout')
-@section('title', 'BlogEtc Manage Comments')
-@section('content')
+@extends("blogetc_admin::layouts.admin_layout")
+@section("content")
+
     @forelse ($comments as $comment)
-        <div class="card m-4">
+
+        <div class="card m-4" >
             <div class="card-body">
 
                 <h5 class='card-title'>
 
 
-                    {{$comment->author()}} commented on:
+                    {{$comment->author()}} a commenté sur:
 
                     @if($comment->post)
-                        <a href='{{$comment->post->url()}}'>{{$comment->post->title}}</a>
-                    @else
-                        Unknown blog post
+                    <a href='{{$comment->post->url()}}'>{{$comment->post->title}}</a>
+                        @else
+                        Post inconnu
+                        @endif
 
-                    @endif
-
-                    on {{$comment->created_at}} </h5>
+                    le {{$comment->created_at}} </h5>
 
 
                 <p class='m-3 p-2'>{{$comment->comment}}</p>
+
+
+
+
                 @if($comment->post)
-                    <a href="{{$comment->post->url()}}" class="card-link btn btn-outline-secondary">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        View Post
-                    </a>
+
+                    {{--VIEW + EDIT POST LINKS--}}
+                    <a href="{{$comment->post->url()}}" class="card-link btn btn-outline-secondary"><i class="fa fa-file-text-o"
+                                                                                              aria-hidden="true"></i>
+                        Voir le post</a>
                     <a href="{{$comment->post->edit_url()}}" class="card-link btn btn-primary">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        Edit Post
-                    </a>
+                        Éditer le post</a>
+
+
                 @endif
+
+
 
                 @if(!$comment->approved)
                     {{--APPROVE BUTTON--}}
-                    <form method='post' action='{{route("blogetc.admin.comments.approve", $comment->id)}}'
-                          class='float-right'>
+                    <form method='post' action='{{route("blogetc.admin.comments.approve", $comment->id)}}' class='float-right'>
                         @csrf
                         @method("PATCH")
-                        <input type='submit' class='btn btn-success btn-sm' value='Approve'/>
+                        <input type='submit' class='btn btn-success btn-sm' value='Approuver'/>
                     </form>
                 @endif
 
                 {{--DELETE BUTTON--}}
                 <form
                         onsubmit="return confirm('Are you sure you want to delete this blog post comment?\n You cannot undo this action!');"
-                        method='post' action='{{route("blogetc.admin.comments.delete", $comment->id)}}'
-                        class='float-right'>
+                        method='post' action='{{route("blogetc.admin.comments.delete", $comment->id)}}' class='float-right'>
                     @csrf
                     @method("DELETE")
-                    <input type='submit' class='btn btn-danger btn-sm' value='Delete'/>
+                    <input type='submit' class='btn btn-danger btn-sm' value='Supprimer'/>
                 </form>
             </div>
         </div>
+
+
     @empty
-        <div class="alert alert-danger">None found</div>
+        <div class='alert alert-danger'>Aucune demande trouvée</div>
     @endforelse
 
-    <div class="text-center">
-        {{ $comments->links() }}
-    </div>
-@endsection
 
+    <div class='text-center'>
+        {{$comments->appends( [] )->links()}}
+    </div>
+
+@endsection

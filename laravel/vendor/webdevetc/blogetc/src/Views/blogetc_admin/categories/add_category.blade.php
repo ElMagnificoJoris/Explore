@@ -1,12 +1,16 @@
-@extends('blogetc_admin::layouts.admin_layout')
-@section('title', 'BlogEtc - Add Category')
-@section('content')
-    <h5>Admin - Add Category</h5>
+@extends("blogetc_admin::layouts.admin_layout")
+@section("content")
 
-    <form method="post" action="{{ route('blogetc.admin.categories.create_category') }}" enctype="multipart/form-data">
+
+    <h5>Admin - Ajouter une catégorie</h5>
+
+    <form method='post' action='{{route("blogetc.admin.categories.create_category")}}'  enctype="multipart/form-data" >
+
         @csrf
-        @include('blogetc_admin::categories.form', ['category' => new \WebDevEtc\BlogEtc\Models\Category()])
+        @include("blogetc_admin::categories.form", ['category' => new \WebDevEtc\BlogEtc\Models\BlogEtcCategory()])
 
-        <input type="submit" class="btn btn-primary" value="Add New Category">
+        <input type='submit' class='btn btn-primary' value='Valider' >
+
     </form>
+
 @endsection
