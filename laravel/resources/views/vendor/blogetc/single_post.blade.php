@@ -4,7 +4,7 @@
 
     {{--https://webdevetc.com/laravel/packages/blogetc-blog-system-for-your-laravel-app/help-documentation/laravel-blog-package-blogetc#guide_to_views--}}
 
-    <div class='container'>
+    <div class='container containblog'>
     <div class='row'>
         <div class='col-sm-12 col-md-12 col-lg-12'>
 

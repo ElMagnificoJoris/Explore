@@ -3,7 +3,7 @@
 
     {{--https://webdevetc.com/laravel/packages/blogetc-blog-system-for-your-laravel-app/help-documentation/laravel-blog-package-blogetc#guide_to_views--}}
 
-    <div class='row'>
+    <div class='row contain'>
         <div class='col-sm-12'>
             <h2>Résultats de la recherche pour "{{$query}}"</h2>
 

@@ -2,6 +2,7 @@
 
 namespace WebDevEtc\BlogEtc\Scopes;
 
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -17,10 +18,11 @@ class BlogEtcPublishedScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if (!\Auth::check() || !\Auth::user()->canManageBlogEtcPosts()) {
-            // user is a guest, or if logged in they can't manage blog posts
-            $builder->where('is_published', true);
-            $builder->where('posted_at', '<=', Carbon::now());
+        if (Auth::check() && Auth::user()->canManageBlogEtcPosts()) {
+            return;
         }
+
+        $builder->where('is_published', true);
+        $builder->where('posted_at', '<=', Carbon::now());
     }
 }

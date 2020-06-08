@@ -1,7 +1,7 @@
 @extends("layouts.app",['title'=>"Saved comment"])
 @section("content")
 
-    <div class='text-center'>
+    <div class='text-center contain'>
         <h3>Merci! Votre commentaire a été sauvegardé!</h3>
 
         @if(!config("blogetc.comments.auto_approve_comments",false) )

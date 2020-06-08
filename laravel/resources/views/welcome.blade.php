@@ -7,17 +7,17 @@
 <div class="contain">
 <div class="slideshow-container">
 <div class="slideshow-inner">
-<div class="mySlides fade">
+<div class="mySlides">
 <img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;' alt="sally lightfoot crab"/>
-    <div class="text">Sally Lightfoot Crab</div>
+    <div class="text">Une jolie montagne</div>
   </div>
-<div class="mySlides fade">
+<div class="mySlides">
 <img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;' alt="fighting nazca boobies"/>
-    <div class="text">A scuffle between two Nazca Boobies</div>
+    <div class="text">Un beau paysage</div>
   </div>
-<div class="mySlides fade">
+<div class="mySlides">
 <img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;' alt="otovalo waterfall"/>
-    <div class="text">A waterfall discovered on a hike in Otovalo</div>
+    <div class="text">Une magnifique Photo</div>
   </div>
 </div>
 

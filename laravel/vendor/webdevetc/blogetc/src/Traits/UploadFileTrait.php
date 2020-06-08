@@ -2,8 +2,11 @@
 
 namespace WebDevEtc\BlogEtc\Traits;
 
+use Exception;
 use File;
 use Illuminate\Http\UploadedFile;
+use Image;
+use RuntimeException;
 use WebDevEtc\BlogEtc\Events\UploadedImage;
 use WebDevEtc\BlogEtc\Models\BlogEtcPost;
 
@@ -33,13 +36,59 @@ trait UploadFileTrait
     }
 
     /**
+     * @param BlogEtcPost $new_blog_post
+     * @param $suggested_title - used to help generate the filename
+     * @param $image_size_details - either an array (with 'w' and 'h') or a string (and it'll be uploaded at full size, no size reduction, but will use this string to generate the filename)
+     * @param $photo
+     *
+     * @throws Exception
+     *
+     * @return array
+     */
+    protected function UploadAndResize(BlogEtcPost $new_blog_post = null, $suggested_title, $image_size_details, $photo)
+    {
+        $image_filename = $this->getImageFilename($suggested_title, $image_size_details, $photo);
+        $destinationPath = $this->image_destination_path();
+
+        $resizedImage = Image::make($photo->getRealPath());
+
+        if (is_array($image_size_details)) {
+            $w = $image_size_details['w'];
+            $h = $image_size_details['h'];
+
+            if (isset($image_size_details['crop']) && $image_size_details['crop']) {
+                $resizedImage = $resizedImage->fit($w, $h);
+            } else {
+                $resizedImage = $resizedImage->resize($w, $h, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+        } elseif ('fullsize' === $image_size_details) {
+            $w = $resizedImage->width();
+            $h = $resizedImage->height();
+        } else {
+            throw new Exception('Invalid image_size_details value');
+        }
+
+        $resizedImage->save($destinationPath.'/'.$image_filename, config('blogetc.image_quality', 80));
+
+        event(new UploadedImage($image_filename, $resizedImage, $new_blog_post, __METHOD__));
+
+        return [
+            'filename' => $image_filename,
+            'w'        => $w,
+            'h'        => $h,
+        ];
+    }
+
+    /**
      * Get a filename (that doesn't exist) on the filesystem.
      *
      * Todo: support multiple filesystem locations.
      *
      * @param $image_size_details - either an array (with w/h attributes) or a string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return string
      */
@@ -64,74 +113,23 @@ trait UploadFileTrait
         }
 
         // too many attempts...
-        throw new \RuntimeException("Unable to find a free filename after $i attempts - aborting now.");
+        throw new RuntimeException("Unable to find a free filename after $i attempts - aborting now.");
     }
 
     /**
-     * @throws \RuntimeException
-     *
      * @return string
      */
-    protected function image_destination_path()
+    protected function generate_base_filename(string $suggested_title)
     {
-        $path = public_path('/'.config('blogetc.blog_upload_dir'));
-        $this->check_image_destination_path_is_writable($path);
+        $base = substr($suggested_title, 0, 100);
+        if (!$base) {
+            // if we have an empty string then we should use a random one:
+            $base = 'image-'.str_random(5);
 
-        return $path;
-    }
-
-    /**
-     * @param BlogEtcPost $new_blog_post
-     * @param $suggested_title - used to help generate the filename
-     * @param $image_size_details - either an array (with 'w' and 'h') or a string (and it'll be uploaded at full size, no size reduction, but will use this string to generate the filename)
-     * @param $photo
-     *
-     * @throws \Exception
-     *
-     * @return array
-     */
-    protected function UploadAndResize(BlogEtcPost $new_blog_post = null, $suggested_title, $image_size_details, $photo)
-    {
-        // get the filename/filepath
-        $image_filename = $this->getImageFilename($suggested_title, $image_size_details, $photo);
-        $destinationPath = $this->image_destination_path();
-
-        // make image
-        $resizedImage = \Image::make($photo->getRealPath());
-
-        if (is_array($image_size_details)) {
-            // resize to these dimensions:
-            $w = $image_size_details['w'];
-            $h = $image_size_details['h'];
-
-            if (isset($image_size_details['crop']) && $image_size_details['crop']) {
-                $resizedImage = $resizedImage->fit($w, $h);
-            } else {
-                $resizedImage = $resizedImage->resize($w, $h, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-        } elseif ('fullsize' === $image_size_details) {
-            // nothing to do here - no resizing needed.
-            // We just need to set $w/$h with the original w/h values
-            $w = $resizedImage->width();
-            $h = $resizedImage->height();
-        } else {
-            throw new \Exception('Invalid image_size_details value');
+            return $base;
         }
 
-        // save image
-        $resizedImage->save($destinationPath.'/'.$image_filename, config('blogetc.image_quality', 80));
-
-        // fireevent
-        event(new UploadedImage($image_filename, $resizedImage, $new_blog_post, __METHOD__));
-
-        // return the filename and w/h details
-        return [
-            'filename' => $image_filename,
-            'w'        => $w,
-            'h'        => $h,
-        ];
+        return $base;
     }
 
     /**
@@ -153,7 +151,7 @@ trait UploadFileTrait
      *
      * @param array|string $image_size_details
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return string
      */
@@ -166,7 +164,20 @@ trait UploadFileTrait
         }
 
         // was not a string or array, so error
-        throw new \RuntimeException('Invalid image_size_details: must be an array with w and h, or a string');
+        throw new RuntimeException('Invalid image_size_details: must be an array with w and h, or a string');
+    }
+
+    /**
+     * @throws RuntimeException
+     *
+     * @return string
+     */
+    protected function image_destination_path()
+    {
+        $path = public_path('/'.config('blogetc.blog_upload_dir'));
+        $this->check_image_destination_path_is_writable($path);
+
+        return $path;
     }
 
     /**
@@ -175,31 +186,15 @@ trait UploadFileTrait
      *
      * @param $path
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function check_image_destination_path_is_writable($path)
     {
         if (!$this->checked_blog_image_dir_is_writable) {
             if (!is_writable($path)) {
-                throw new \RuntimeException("Image destination path is not writable ($path)");
+                throw new RuntimeException("Image destination path is not writable ($path)");
             }
             $this->checked_blog_image_dir_is_writable = true;
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function generate_base_filename(string $suggested_title)
-    {
-        $base = substr($suggested_title, 0, 100);
-        if (!$base) {
-            // if we have an empty string then we should use a random one:
-            $base = 'image-'.str_random(5);
-
-            return $base;
-        }
-
-        return $base;
     }
 }

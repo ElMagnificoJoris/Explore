@@ -5,7 +5,7 @@ namespace WebDevEtc\BlogEtc;
 use Session;
 
 /**
- * Class Helpers.
+ * Small little helper class of static methods.
  */
 class Helpers
 {
@@ -15,21 +15,11 @@ class Helpers
     const FLASH_MESSAGE_SESSION_KEY = 'WEBDEVETC_FLASH';
 
     /**
-     * Set a new message.
+     * @deprecated use pullFlashedMessage() instead
      */
-    public static function flash_message(string $message)
+    public static function pull_flashed_message(): ?string
     {
-        Session::flash(self::FLASH_MESSAGE_SESSION_KEY, $message);
-    }
-
-    /**
-     * Is there a flashed message?
-     *
-     * @return bool
-     */
-    public static function has_flashed_message()
-    {
-        return Session::has(self::FLASH_MESSAGE_SESSION_KEY);
+        return self::pullFlashedMessage();
     }
 
     /**
@@ -37,32 +27,71 @@ class Helpers
      *
      * @return string
      */
-    public static function pull_flashed_message()
+    public static function pullFlashedMessage(): ?string
     {
         return Session::pull(self::FLASH_MESSAGE_SESSION_KEY);
     }
 
     /**
-     * Use this (Helpers::rss_html_tag()) in your blade/template files, within <head>
-     * to auto insert the links to rss feed.
-     *
-     * @return string
+     * @deprecated use hasFlashedMessage() instead
      */
-    public static function rss_html_tag()
+    public static function has_flashed_message(): bool
     {
-        return '<link rel="alternate" type="application/atom+xml" title="Atom RSS Feed" href="'.e(route('blogetc.feed')).'?type=atom" />
-  <link rel="alternate" type="application/rss+xml" title="XML RSS Feed" href="'.e(route('blogetc.feed')).'?type=rss" />
-  ';
+        return self::hasFlashedMessage();
+    }
+
+    /**
+     * Is there a flashed message?
+     */
+    public static function hasFlashedMessage(): bool
+    {
+        return Session::has(self::FLASH_MESSAGE_SESSION_KEY);
+    }
+
+    //## Depreciated methods:
+
+    /**
+     * @deprecated use flashMessage() instead
+     */
+    public static function flash_message(string $message): void
+    {
+        self::flashMessage($message);
+    }
+
+    /**
+     * Set a new flash message - used in the BlogEtc Admin panel to flash messages to user
+     * such as 'post created'.
+     */
+    public static function flashMessage(string $message): void
+    {
+        Session::flash(self::FLASH_MESSAGE_SESSION_KEY, $message);
+    }
+
+    /**
+     * @deprecated use rssHtmlTag() instead
+     */
+    public static function rss_html_tag(): string
+    {
+        return self::rssHtmlTag();
+    }
+
+    /**
+     * Use this in your blade/template files, within <head> to auto insert the links to rss feed.
+     */
+    public static function rssHtmlTag(): string
+    {
+        return '<link rel="alternate" type="application/atom+xml" title="Atom RSS Feed" href="'
+            .e(route('blogetc.feed')).'?type=atom" />'
+            .'<link rel="alternate" type="application/rss+xml" title="XML RSS Feed" href="'
+            .e(route('blogetc.feed')).'?type=rss" />';
     }
 
     /**
      * This method is depreciated. Just use the config() directly.
      *
-     * @return array
-     *
      * @deprecated
      */
-    public static function image_sizes()
+    public static function image_sizes(): array
     {
         return config('blogetc.image_sizes');
     }

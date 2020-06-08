@@ -4,25 +4,13 @@ namespace WebDevEtc\BlogEtc\Tests\Feature\Admin;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\RedirectResponse;
-//use WebDevEtc\BlogEtc\Models\Category;
-use WebDevEtc\BlogEtc\Models\BlogEtcCategory as Category;
-//use WebDevEtc\BlogEtc\Models\Post;
-use WebDevEtc\BlogEtc\Models\BlogEtcPost as Post;
+use WebDevEtc\BlogEtc\Models\Category;
+use WebDevEtc\BlogEtc\Models\Post;
 use WebDevEtc\BlogEtc\Tests\TestCase;
 
 class ManagePostsControllerTest extends TestCase
 {
     use WithFaker;
-
-    /**
-     * Setup the feature test.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->featureSetUp();
-    }
 
     /**
      * Test that users passing the admin gate can access the admin index.
@@ -52,7 +40,6 @@ class ManagePostsControllerTest extends TestCase
         $response = $this->get(route('blogetc.admin.index'));
 
         $this->assertSame(RedirectResponse::HTTP_UNAUTHORIZED, $response->getStatusCode());
-//        $response->assertForbidden();
     }
 
     /**
@@ -64,7 +51,6 @@ class ManagePostsControllerTest extends TestCase
         $response = $this->get(route('blogetc.admin.index'));
 
         $this->assertSame(RedirectResponse::HTTP_UNAUTHORIZED, $response->getStatusCode());
-//        $response->assertRedirect(route('login'));
     }
 
     /**
@@ -72,7 +58,6 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testIndexIncludesRecentPost(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
         $post = factory(Post::class)->create();
 
         $this->beAdminUser();
@@ -81,7 +66,7 @@ class ManagePostsControllerTest extends TestCase
 
         $response->assertSee($post->title);
         $response->assertViewHas('posts');
-        $posts = $response->viewData('posts');
+        $response->viewData('posts');
     }
 
     /**
@@ -120,10 +105,8 @@ class ManagePostsControllerTest extends TestCase
     /**
      * Test that new posts can be created, and associated to a category.
      */
-    public function testStoreWithCategory()
+    public function testStoreWithCategory(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $this->beAdminUser();
 
         $category = factory(Category::class)->create();
@@ -140,12 +123,11 @@ class ManagePostsControllerTest extends TestCase
 
         $response->assertRedirect()->assertSessionDoesntHaveErrors();
 
-        $post = Post::where('title', $params['title'])->firstOrFail();
+        $redirectTo = $response->headers->get('location');
+        $postId = array_last(explode('/', $redirectTo));
 
-        $postCategories = $post->categories;
-
-        $this->assertCount(1, $postCategories);
-        $this->assertTrue($postCategories->first()->is($category));
+        $this->assertDatabaseHas('blog_etc_post_categories',
+            ['blog_etc_post_id' => $postId, 'blog_etc_category_id' => $category->id]);
     }
 
     /**
@@ -153,10 +135,8 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testStoreWithInvalidCategory(): void
     {
-        $this->markTestSkipped('Skipping as current version does not support this (next version does - keeping existing tests to make migration easier)');
-
         $this->beAdminUser();
-        $invalidCategoryID = 1000;
+        $invalidCategoryID = 99999;
 
         $params = [
             'title'             => $this->faker->sentence,
@@ -166,9 +146,13 @@ class ManagePostsControllerTest extends TestCase
             'category'          => [$invalidCategoryID => '1'],
         ];
 
-        $response = $this->post(route('blogetc.admin.store_post'), $params);
+        $this->post(route('blogetc.admin.store_post'), $params);
 
-        $response->assertSessionHasErrors('category');
+        // TODO - there should be a request fobidding access if trying to store invalid category id
+
+        $post = Post::where('title', $params['title'])->where('post_body', $params['post_body'])->firstOrFail();
+
+        $this->assertDatabaseMissing('blog_etc_post_categories', ['blog_etc_post_id' => $post->id]);
     }
 
     /**
@@ -176,8 +160,6 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testEdit(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $this->beAdminUser();
 
         $post = factory(Post::class)->create();
@@ -206,8 +188,6 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testDestroy(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $this->beAdminUser();
 
         $post = factory(Post::class)->create();
@@ -237,15 +217,12 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testUpdate(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $this->beAdminUser();
 
         $post = factory(Post::class)->create();
 
         $params = $post->toArray();
 
-        // Update title.
         $params['title'] = $this->faker->sentence;
 
         $response = $this->patch(route('blogetc.admin.edit_post', $post), $params);
@@ -260,8 +237,6 @@ class ManagePostsControllerTest extends TestCase
      */
     public function testUpdateInvalidPostID(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $invalidPostID = 10000;
         $this->beAdminUser();
 
@@ -270,5 +245,15 @@ class ManagePostsControllerTest extends TestCase
         $response = $this->patch(route('blogetc.admin.edit_post', $invalidPostID), $params);
 
         $response->assertNotFound();
+    }
+
+    /**
+     * Setup the feature test.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->featureSetUp();
     }
 }

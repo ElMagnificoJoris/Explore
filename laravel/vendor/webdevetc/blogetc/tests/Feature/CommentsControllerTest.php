@@ -3,10 +3,11 @@
 namespace WebDevEtc\BlogEtc\Tests\Feature;
 
 use Illuminate\Foundation\Testing\WithFaker;
-//use WebDevEtc\BlogEtc\Models\Post;
-use WebDevEtc\BlogEtc\Models\BlogEtcPost as Post;
-//use WebDevEtc\BlogEtc\Services\CommentsService;
+use Illuminate\Http\Response;
+use WebDevEtc\BlogEtc\Models\Post;
 use WebDevEtc\BlogEtc\Tests\TestCase;
+
+//use WebDevEtc\BlogEtc\Services\CommentsService;
 
 /**
  * Class PostsControllerTest.
@@ -20,31 +21,12 @@ class CommentsControllerTest extends TestCase
     use WithFaker;
 
     /**
-     * Setup the feature test.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->featureSetUp();
-
-        // Built in (database) comments by default):
-        config(['blogetc.comments.type_of_comments_to_show' => 'built_in']);
-//        config(['blogetc.comments.type_of_comments_to_show' => CommentsService::COMMENT_TYPE_BUILT_IN]);
-        // Auto approve comments by default:
-        config(['blogetc.comments.auto_approve_comments' => true]);
-        // Disable captcha by default:
-        config(['blogetc.captcha.captcha_enabled' => false]);
-    }
-
-    /**
      * Test the store method for saving a new comment.
      */
     public function testStore(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $post = factory(Post::class)->create();
+        $this->beAdminUser();
 
         $url = route('blogetc.comments.add_new_comment', $post->slug);
 
@@ -57,11 +39,9 @@ class CommentsControllerTest extends TestCase
 
         $response = $this->postJson($url, $params);
 
-        $response->assertCreated();
+        $this->assertSame(Response::HTTP_CREATED, $response->getStatusCode());
 
-        // Test can see the comment on the post page and therefore saved in the database.
-        $this->withoutExceptionHandling();
-        $postResponse = $this->get(route('blogetc.show', $post->slug));
+        $postResponse = $this->get(route('blogetc.single', $post->slug));
         $postResponse->assertSee($params['comment']);
     }
 
@@ -70,10 +50,7 @@ class CommentsControllerTest extends TestCase
      */
     public function testDisabledCommentsStore(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
-        // Disable comments:
-        config(['blogetc.comments.type_of_comments_to_show' => CommentsService::COMMENT_TYPE_DISABLED]);
+        config(['blogetc.comments.type_of_comments_to_show' => 'disabled']);
 
         $post = factory(Post::class)->create();
 
@@ -90,7 +67,20 @@ class CommentsControllerTest extends TestCase
 
         $response->assertForbidden();
 
-        // Assert was not written to db:
         $this->assertDatabaseMissing('blog_etc_comments', ['comment' => $params['comment']]);
+    }
+
+    /**
+     * Setup the feature test.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->featureSetUp();
+
+        config(['blogetc.comments.type_of_comments_to_show' => 'built_in']);
+        config(['blogetc.comments.auto_approve_comments' => true]);
+        config(['blogetc.captcha.captcha_enabled' => false]);
     }
 }

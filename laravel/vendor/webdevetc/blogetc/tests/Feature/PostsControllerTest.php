@@ -2,12 +2,9 @@
 
 namespace WebDevEtc\BlogEtc\Tests\Feature;
 
-use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
-//use WebDevEtc\BlogEtc\Models\Category;
-//use WebDevEtc\BlogEtc\Models\Post;
-use WebDevEtc\BlogEtc\Models\BlogEtcCategory as Category;
-use WebDevEtc\BlogEtc\Models\BlogEtcPost as Post;
+use WebDevEtc\BlogEtc\Models\Category;
+use WebDevEtc\BlogEtc\Models\Post;
 use WebDevEtc\BlogEtc\Tests\TestCase;
 
 /**
@@ -18,16 +15,6 @@ use WebDevEtc\BlogEtc\Tests\TestCase;
 class PostsControllerTest extends TestCase
 {
     use WithFaker;
-
-    /**
-     * Setup the feature test.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->featureSetUp();
-    }
 
     /**
      * Test the index page loads.
@@ -50,11 +37,9 @@ class PostsControllerTest extends TestCase
      */
     public function testShow(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $post = factory(Post::class)->create();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertOk()
             ->assertViewHas('post', $post)
@@ -78,11 +63,9 @@ class PostsControllerTest extends TestCase
      */
     public function testShow404IfNotPublished(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $post = factory(Post::class)->state('not_published')->create();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertNotFound();
     }
@@ -92,16 +75,10 @@ class PostsControllerTest extends TestCase
      */
     public function testShowAdminCanSeeNotPublished(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
-        $user = new User();
-        $user->id = 1;
-        $this->actingAs($user);
-        $this->allowAdminGate();
-
+        $this->beAdminUser();
         $post = factory(Post::class)->state('not_published')->create();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertOk()->assertViewHas('post', $post);
     }
@@ -111,11 +88,9 @@ class PostsControllerTest extends TestCase
      */
     public function testShow404IfFuturePost(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $post = factory(Post::class)->state('in_future')->create();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertNotFound();
     }
@@ -125,16 +100,11 @@ class PostsControllerTest extends TestCase
      */
     public function testAdminsCanSeeFuturePosts(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
-        $user = new User();
-        $user->id = 1;
-        $this->actingAs($user);
-        $this->allowAdminGate();
+        $this->beAdminUser();
 
         $post = factory(Post::class)->state('in_future')->create();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertOk()->assertViewHas('post', $post);
     }
@@ -144,12 +114,12 @@ class PostsControllerTest extends TestCase
      */
     public function testShow404IfDeletedPost(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
         $post = factory(Post::class)->create();
+        $this->beAdminUser();
+
         $post->delete();
 
-        $response = $this->get(route('blogetc.show', $post->slug));
+        $response = $this->get(route('blogetc.single', $post->slug));
 
         $response->assertNotFound();
     }
@@ -159,9 +129,9 @@ class PostsControllerTest extends TestCase
      */
     public function testCategory(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
+        Post::truncate();
+        Category::truncate();
 
-        $this->withoutExceptionHandling();
         $post = factory(Post::class)->create();
         $category = factory(Category::class)->create();
         $post->categories()->save($category);
@@ -169,7 +139,7 @@ class PostsControllerTest extends TestCase
         $response = $this->get(route('blogetc.view_category', $category->slug));
 
         $response->assertOk()
-            ->assertViewHas('category', $category)
+            ->assertViewHas('blogetc_category', $category)
             ->assertSee($post->title);
     }
 
@@ -178,22 +148,25 @@ class PostsControllerTest extends TestCase
      */
     public function testCategoryExcludesOtherCategories(): void
     {
-        $this->markTestSkipped('Skipping as current version does not have factories (next version does - keeping existing tests to make migration easier)');
-
-        $this->withoutExceptionHandling();
         $post = factory(Post::class)->create();
         $category = factory(Category::class)->create();
         $post->categories()->save($category);
-
-        // Another category, unassociated to $post:
         $unrelatedCategory = factory(Category::class)->create();
 
-        // Get category page for the unrelated category:
         $response = $this->get(route('blogetc.view_category', $unrelatedCategory->slug));
 
         $response->assertOk();
-        $response->assertViewHas('category', $unrelatedCategory);
-
+        $response->assertViewHas('blogetc_category', $unrelatedCategory);
         $response->assertDontSee($post->title);
+    }
+
+    /**
+     * Setup the feature test.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->featureSetUp();
     }
 }

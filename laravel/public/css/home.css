@@ -166,3 +166,9 @@ main{
 .container{
   width: 1140px;
 }
+
+.containblog{
+  width: 1000px;
+  background-color: rgba(255,255,255,0.5);
+  padding: 25px 25px 0px 25px;
+}
