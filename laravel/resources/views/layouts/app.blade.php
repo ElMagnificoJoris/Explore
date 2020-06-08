@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Explore') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,9 +25,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-              <a id="logoCont" class="navbar-brand" href="{{ url('/') }}">
-                  <img id="logo" src="{{ asset('images/logo.png') }}"/>
-              </a>
+                <a id="logoCont" class="navbar-brand" href="{{ url('/') }}">
+                    <img id="logo" src="{{ asset('images/logo.png') }}"/>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,6 +41,28 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if(\Auth::check() && \Auth::user()->isAdmin())
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Sites <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @foreach (DB::table('savedwebsites')->get() as $savedwebsite)
+                                        <a class="dropdown-item" href="{!! $savedwebsite->link !!}" target="_blank">
+                                            {!! $savedwebsite->name !!}
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('deleteWebsite', $savedwebsite->name) }}">
+                                            -delete- {!! $savedwebsite->name !!}
+                                        </a>
+                                    @endforeach
+                                    <a class="dropdown-item" href="{{ route('addNewWebsite') }}">
+                                        {{ __('-Rajouter un site-') }}
+                                    </a>
+                                </div>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{ __('Qui sommes nous ?') }}</a>
                         </li>
@@ -53,6 +75,9 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -93,5 +118,6 @@
           </div>
         </div>
     </div>
+    @yield('scripts')
 </body>
 </html>
