@@ -28,3 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/nous', 'MainController@about')->name('nous');
+
+Route::get('/prestations', 'MainController@presta')->name('prestations');
