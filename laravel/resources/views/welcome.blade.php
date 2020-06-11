@@ -8,15 +8,15 @@
 <div class="slideshow-container">
 <div class="slideshow-inner">
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;' alt="sally lightfoot crab"/>
+<img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;'/>
     <div class="text">Une jolie montagne</div>
   </div>
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;' alt="fighting nazca boobies"/>
+<img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;'/>
     <div class="text">Un beau paysage</div>
   </div>
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;' alt="otovalo waterfall"/>
+<img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;'/>
     <div class="text">Une magnifique Photo</div>
   </div>
 </div>
