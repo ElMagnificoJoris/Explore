@@ -52,12 +52,12 @@
                                         <a class="dropdown-item" href="{!! $savedwebsite->link !!}" target="_blank">
                                             {!! $savedwebsite->name !!}
                                         </a>
-
-                                        <a class="dropdown-item" href="{{ route('deleteWebsite', $savedwebsite->name) }}">
-                                            -delete- {!! $savedwebsite->name !!}
-                                        </a>
+                                        
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['delete_website', $savedwebsite->name]]) !!}
+                                            {!! Form::submit('-supprimer-'.' '.$savedwebsite->name, ['class' => 'dropdown-item']) !!}
+                                        {!! Form::close() !!}
                                     @endforeach
-                                    <a class="dropdown-item" href="{{ route('addNewWebsite') }}">
+                                    <a class="dropdown-item" href="{{ route('save_website') }}">
                                         {{ __('-Rajouter un site-') }}
                                     </a>
                                 </div>
@@ -70,7 +70,11 @@
                             <a class="nav-link" href="#">{{ __('Prestations') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Contact') }}</a>
+                            @if(\Auth::check() && \Auth::user()->isAdmin())
+                                <a class="nav-link" href="{{ route('contact_admin') }}">{{ __('Voir les contacts') }}</a>
+                            @else
+                            <a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a>
+                            @endif
                         </li>
                         @guest
                             <li class="nav-item">

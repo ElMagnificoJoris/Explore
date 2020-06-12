@@ -34,6 +34,6 @@ class SavedWebsiteController extends Controller
     {
         DB::table('savedwebsites')->where('name', $name)->delete();
 
-        return back();
+        return redirect()->back();
     }
 }
