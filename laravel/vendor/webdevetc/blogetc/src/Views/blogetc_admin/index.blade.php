@@ -1,9 +1,7 @@
 @extends("blogetc_admin::layouts.admin_layout")
 @section("content")
 
-
     <h5>Admin - Gérer les blogs</h5>
-
     @forelse($posts as $post)
         <div class="card m-4" style="">
             <div class="card-body">

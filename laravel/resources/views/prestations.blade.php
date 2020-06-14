@@ -8,7 +8,7 @@
 <div class="contain justify-content-center">
   <div class=stat>
     <div>
-      <span>Vibivilité</span>
+      <span>Visibilité</span>
       <img src="{{ asset('images/vis.png') }}">
       <div>
         Nous vous apprenons à utiliser les réseaux afin d'avoir plus de visibilité.
@@ -32,21 +32,21 @@
   <h1>Nos Prestations</h1>
   <div class="presta">
     <div>
-      <img src="{{ asset('images/bureau.jpg') }}">
+      <img src="{{ asset('images/social.jpg') }}">
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Nous vous apprenons à gérer vos réseaux sociaux, afin de vous contruire un réseau !
       </div>
     </div>
     <div>
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Nous vous fournissons aussi les clés pour pouvoir créer votre propre site web profesionnel !
       </div>
-      <img src="{{ asset('images/bureau.jpg') }}">
+      <img src="{{ asset('images/website.jpg') }}">
     </div>
     <div>
-      <img src="{{ asset('images/bureau.jpg') }}">
+      <img src="{{ asset('images/ntic.jpg') }}">
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Nous vous apprenons les Nouvelles Techniques de l’Information et de la Communication (NTIC) afin de mieux gérer votre comunication digitale !
       </div>
     </div>
   </div>

@@ -116,6 +116,7 @@ html, body {
 
 .txtInf{
   font-size: 2em;
+  text-align: center;
 }
 
 .pied{
@@ -132,7 +133,8 @@ html, body {
 .contain{
   width: 1000px;
   background-color: rgba(255,255,255,0.5);
-  padding: 25px 0 0 0;
+  padding: 25px 0 25px 0;
+  justify-content: center;
 }
 
 .blank{
@@ -142,7 +144,9 @@ html, body {
 main{
   display: flex;
   justify-content: space-around;
-  background-image: url("../images/peak.jpg");
+  background-image: url("../images/peak4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #logo{
@@ -173,10 +177,23 @@ main{
   padding: 25px 25px 0px 25px;
 }
 
+.panel-heading{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .navl{
   color: rgba(0, 0, 0, 0.5);
   display: block;
   padding: 0.5rem 1rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
+}
+
+main div div .logoInf img{
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }

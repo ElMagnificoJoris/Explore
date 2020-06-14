@@ -67,4 +67,18 @@ class User extends Authenticatable
 
         return true;
     }
+
+    /**
+     * 
+     * tells if the selected user is an Admin or not.
+     * 
+     * @return bool - true = he is Admin,
+     *        false = he is not Admin
+     */
+    public function isAdmin()
+    {
+        if ($this->email === "flav38320@gmail.com")
+            return true;
+        return true;
+    }
 }
