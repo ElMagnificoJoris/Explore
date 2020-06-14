@@ -61,3 +61,7 @@
 <div class=blank>
 </div>
 @endsection
+
+@section('scripts')
+  <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
+@endsection
