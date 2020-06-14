@@ -116,6 +116,7 @@ html, body {
 
 .txtInf{
   font-size: 2em;
+  text-align: center;
 }
 
 .pied{
@@ -142,7 +143,9 @@ html, body {
 main{
   display: flex;
   justify-content: space-around;
-  background-image: url("../images/peak.jpg");
+  background-image: url("../images/peak4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #logo{
@@ -179,4 +182,12 @@ main{
   padding: 0.5rem 1rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
+}
+
+main div div .logoInf img{
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }

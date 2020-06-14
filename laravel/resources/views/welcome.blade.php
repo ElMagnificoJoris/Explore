@@ -8,16 +8,16 @@
 <div class="slideshow-container">
 <div class="slideshow-inner">
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;'/>
-    <div class="text">Une jolie montagne</div>
+<img id="sld" src="{{ asset('images/greMount.jpg') }}" style='width: 100%;'/>
+    <div class="text">Une entreprise au coeur des montagnes</div>
   </div>
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;'/>
-    <div class="text">Un beau paysage</div>
+<img id="sld" src="{{ asset('images/part.jpg') }}" style='width: 100%;'/>
+    <div class="text">De nombreux partenariats</div>
   </div>
 <div class="mySlides">
-<img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;'/>
-    <div class="text">Une magnifique Photo</div>
+<img id="sld" src="{{ asset('images/eco.jpg') }}" style='width: 100%;'/>
+    <div class="text">Une entreprise dans l'air du temps !</div>
   </div>
 </div>
 
@@ -34,26 +34,26 @@
 <div class="divInf">
   <div class="contentInf">
     <div class="txtInf">
-      Explore est une entreprise 100% grenobloise qui vous accompagnent dans la promotion de votre produit !
+      Explore est une entreprise 100% grenobloise, qui vous accompagne dans la promotion de votre entreprise !
     </div>
     <div class="imgInf">
-      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+      <img src="{{ asset('images/gre.jpg') }}"/>
     </div>
   </div>
   <div class="contentInf">
-    <div class="imgInf">
-      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+    <div class="imgInf logoInf">
+      <img src="{{ asset('images/logo.png') }}"/>
     </div>
     <div class="txtInf">
-      fsefsefsefef
+      Explore possède plusieurs réseaux dans toute la France, et même en Suisse !
     </div>
   </div>
   <div class="contentInf">
     <div class="txtInf">
-      fesfesfe
+      Explore c'est une entreprise qui s'adapte à vos besoins !
     </div>
     <div class="imgInf">
-      <img src="{{ asset('images/CIMG2371.JPG') }}"/>
+      <img src="{{ asset('images/need.jpg') }}"/>
     </div>
   </div>
 </div>
