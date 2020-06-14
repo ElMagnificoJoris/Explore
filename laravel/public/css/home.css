@@ -132,7 +132,8 @@ html, body {
 .contain{
   width: 1000px;
   background-color: rgba(255,255,255,0.5);
-  padding: 25px 0 0 0;
+  padding: 25px 0 25px 0;
+  justify-content: center;
 }
 
 .blank{
@@ -171,6 +172,11 @@ main{
   width: 1000px;
   background-color: rgba(255,255,255,0.5);
   padding: 25px 25px 0px 25px;
+}
+
+.panel-heading{
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .navl{
