@@ -53,7 +53,7 @@
                                         <a class="dropdown-item" href="{!! $savedwebsite->link !!}" target="_blank">
                                             {!! $savedwebsite->name !!}
                                         </a>
-                                        
+
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['delete_website', $savedwebsite->name]]) !!}
                                             {!! Form::submit('-supprimer-'.' '.$savedwebsite->name, ['class' => 'dropdown-item']) !!}
                                         {!! Form::close() !!}
