@@ -27,22 +27,25 @@
 
 .someNumbers div{
   margin-top: 15px;
-  font-size: 1.5em;
+  font-size: 1  em;
   display: flex;
   flex-direction: row;
+  align-items: center;
   color: #3498DB;
   font-weight: bold;
 }
 
 .find-us{
-  font-size: 2em;
+  font-size: 1.6em;
   margin-top: 50px;
+  text-align: left;s
 }
 
 .social{
   display: flex;
   flex-direction: column;
   padding-left: 25px;
+  text-align: left;
 }
 
 .socialMedia{

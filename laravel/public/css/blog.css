@@ -1,0 +1,14 @@
+.postRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.postRow > div{
+  width: 300px;
+}
+
+.postRow img{
+  width: 290px;
+  margin-top: 5px;
+}
