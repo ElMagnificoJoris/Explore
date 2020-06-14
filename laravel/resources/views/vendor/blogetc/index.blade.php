@@ -9,16 +9,12 @@
                 <div class="text-center">
                         <p class='mb-1'>Vous êtes connecté en tant qu'Admin.
                             <br>
-
                             <a href='{{route("blogetc.admin.index")}}'
                                class='btn border  btn-outline-primary btn-sm '>
-
                                 <i class="fa fa-cogs" aria-hidden="true"></i>
-
                                 Aller au panel Admin</a>
-
-
                         </p>
+                        <br>
                 </div>
             @endif
 

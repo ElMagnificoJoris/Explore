@@ -65,6 +65,9 @@
                             </li>
                         @endif
                         <li class="nav-item">
+                            <a class="navl about" href="{{ route('blogetc.index') }}">{{ __('Blogs') }}</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="navl about" href="{{ route('nous') }}">{{ __('Qui sommes nous ?') }}</a>
                         </li>
                         <li class="nav-item">
