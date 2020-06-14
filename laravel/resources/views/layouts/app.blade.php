@@ -65,10 +65,10 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="navl about" href="#">{{ __('Qui sommes nous ?') }}</a>
+                            <a class="navl about" href="{{ route('nous') }}">{{ __('Qui sommes nous ?') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navl" href="#">{{ __('Prestations') }}</a>
+                            <a class="navl" href="{{ route('prestations') }}">{{ __('Prestations') }}</a>
                         </li>
                         <li class="nav-item">
                             @if(\Auth::check() && \Auth::user()->isAdmin())

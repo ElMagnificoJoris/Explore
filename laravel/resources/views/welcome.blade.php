@@ -1,7 +1,6 @@
 @extends("layouts.app",['title'=>"laravel"])
 
 @section("content")
-  <div class=blank></div>
   <div class="contain">
     <div class="slideshow-container">
       <div class="slideshow-inner">
