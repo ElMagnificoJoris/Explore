@@ -53,7 +53,7 @@
                                         <a class="dropdown-item" href="{!! $savedwebsite->link !!}" target="_blank">
                                             {!! $savedwebsite->name !!}
                                         </a>
-                                        
+
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['delete_website', $savedwebsite->name]]) !!}
                                             {!! Form::submit('-supprimer-'.' '.$savedwebsite->name, ['class' => 'dropdown-item']) !!}
                                         {!! Form::close() !!}
@@ -64,9 +64,6 @@
                                 </div>
                             </li>
                         @endif
-                        <li class="nav-item">
-                            <a class="navl about" href="{{ route('blogetc.index') }}">{{ __('Blogs') }}</a>
-                        </li>
                         <li class="nav-item">
                             <a class="navl about" href="{{ route('nous') }}">{{ __('Qui sommes nous ?') }}</a>
                         </li>
@@ -79,6 +76,9 @@
                             @else
                             <a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a>
                             @endif
+                        </li>
+                        <li class="nav-item">
+                            <a class="navl about" href="{{ route('blogetc.index') }}">{{ __('Blogs') }}</a>
                         </li>
                         @guest
                             <li class="nav-item">
