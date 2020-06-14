@@ -2,7 +2,6 @@
 @section("content")
 
     {{--https://webdevetc.com/laravel/packages/blogetc-blog-system-for-your-laravel-app/help-documentation/laravel-blog-package-blogetc#guide_to_views--}}
-
     <div class='row'>
         <div class='col-sm-12 blogetc_container'>
             @if(Auth::check() && Auth::user()->canManageBlogEtcPosts())
@@ -34,7 +33,7 @@
 
 
             @forelse($posts as $post)
-                @include("blogetc::partials.index_loop")
+              @include("blogetc::partials.index_loop")
             @empty
                 <div class='alert alert-danger'>No posts</div>
             @endforelse
