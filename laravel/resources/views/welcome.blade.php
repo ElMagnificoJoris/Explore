@@ -22,6 +22,25 @@
       <a class="prev" onclick='plusSlides(-1)'>&#10094;</a>
       <a class="next" onclick='plusSlides(1)'>&#10095;</a>
     </div>
+    
+<div class=blank>
+</div>
+<div class="contain">
+<div class="slideshow-container">
+<div class="slideshow-inner">
+<div class="mySlides">
+<img id="sld" src="{{ asset('images/CIMG2371.JPG') }}" style='width: 100%;'/>
+    <div class="text">Une jolie montagne</div>
+  </div>
+<div class="mySlides">
+<img id="sld" src="{{ asset('images/DSCN1055.JPG') }}" style='width: 100%;'/>
+    <div class="text">Un beau paysage</div>
+  </div>
+<div class="mySlides">
+<img id="sld" src="{{ asset('images/DSCN1619.JPG') }}" style='width: 100%;'/>
+    <div class="text">Une magnifique Photo</div>
+  </div>
+</div>
 
     <br/>
 

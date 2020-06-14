@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    @stack('styles')
 
 </head>
 <body>
@@ -64,10 +65,10 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Qui sommes nous ?') }}</a>
+                            <a class="navl about" href="#">{{ __('Qui sommes nous ?') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Prestations') }}</a>
+                            <a class="navl" href="#">{{ __('Prestations') }}</a>
                         </li>
                         <li class="nav-item">
                             @if(\Auth::check() && \Auth::user()->isAdmin())
@@ -78,14 +79,14 @@
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="navl" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="navl dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
