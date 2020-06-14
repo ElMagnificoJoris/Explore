@@ -1,4 +1,4 @@
-@extends("layouts.home",['title'=>"laravel"])
+@extends("layouts.app",['title'=>"laravel"])
 @section("content")
 
 
