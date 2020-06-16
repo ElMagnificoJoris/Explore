@@ -1,3 +1,7 @@
+.prestaTitle{
+  color: #3498DB;
+}
+
 .stat{
   display:flex;
   flex-direction: row;

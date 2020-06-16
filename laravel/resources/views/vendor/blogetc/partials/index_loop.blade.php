@@ -10,9 +10,14 @@
     <div style='padding:10px;'>
     <h3 class=''><a href='{{$post->url()}}'>{{$post->title}}</a></h3>
     <h5 class=''>{{$post->subtitle}}</h5>
-
     <p>{!! $post->generate_introduction(400) !!}</p>
-
+    <div class=''>
+        @foreach($post->categories as $category)
+            <a class='btn btn-outline-secondary btn-sm m-1' href='{{$category->url()}}'>
+                {{$category->category_name}}
+            </a>
+        @endforeach
+    </div>
     <div class='text-center'>
         <a href="{{$post->url()}}" class="btn btn-primary">Voir le post</a>
     </div>

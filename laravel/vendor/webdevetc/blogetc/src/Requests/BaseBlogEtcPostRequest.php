@@ -71,7 +71,7 @@ abstract class BaseBlogEtcPostRequest extends BaseRequest
                 $return[$size] = ['required', 'image'];
             } else {
                 // was not enabled (or all images are disabled), so show an error if it was submitted:
-                $return[$size] = $show_error_if_has_value;
+                $return[$size] = "$show_error_if_has_value";
             }}else{
             if ($image_detail['enabled'] && config('blogetc.image_upload_enabled')) {
                 $return[$size] = ['nullable', 'image'];

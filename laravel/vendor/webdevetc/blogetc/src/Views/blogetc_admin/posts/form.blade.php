@@ -152,14 +152,18 @@
                     </div>
                 @endif
 
-                <label for="blog_{{$size_key}}">Image - {{$size_info['name']}} (optionnel)</label>
+                <label for="blog_{{$size_key}}">Image - {{$size_info['name']}}</label>
                 <small id="blog_{{$size_key}}_help" class="form-text text-muted">Poster une image {{$size_info['name']}} -
                     <code>{{$size_info['w']}}&times;{{$size_info['h']}}px</code> - elle sera
                     automatiquement redimentionnée si plus grande
                 </small>
+                @if($post->has_image($size_info['basic_key']))
                 <input class="form-control" type="file" name="{{$size_key}}" id="blog_{{$size_key}}"
-                       aria-describedby="blog_{{$size_key}}_help">
-
+                       aria-describedby="blog_{{$size_key}}_help" value='1'>
+                @else
+                <input class="form-control" type="file" name="{{$size_key}}" id="blog_{{$size_key}}"
+                       aria-describedby="blog_{{$size_key}}_help" value="0">
+                @endif
 
             </div>
         @endforeach

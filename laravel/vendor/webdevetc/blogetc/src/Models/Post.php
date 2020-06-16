@@ -232,8 +232,8 @@ class Post extends Model implements SearchResultInterface
         if (array_key_exists('image_'.$size, config('blogetc.image_sizes', []))) {
             return true;
         }
-
         throw new InvalidArgumentException('BlogEtcPost image size should be \'large\', \'medium\', \'thumbnail\''.' or another field as defined in config/blogetc.php. Provided size ('.e($size).') is not valid');
+
 //        throw new InvalidImageSizeException('BlogEtcPost image size should be \'large\', \'medium\', \'thumbnail\''.' or another field as defined in config/blogetc.php. Provided size ('.e($size).') is not valid');
     }
 

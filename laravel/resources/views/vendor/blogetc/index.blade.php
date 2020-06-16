@@ -19,7 +19,7 @@
                         <br>
                 </div>
             @endif
-
+            @include("blogetc::sitewide.show_all_categories")
 
             @if(isset($blogetc_category) && $blogetc_category)
                 <h2 class='text-center'>Catégorie: {{$blogetc_category->category_name}}</h2>

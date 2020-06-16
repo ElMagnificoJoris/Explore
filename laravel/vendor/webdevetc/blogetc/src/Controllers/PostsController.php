@@ -105,7 +105,7 @@ class PostsController extends Controller
             $title = 'Viewing blog posts in '.$category->category_name;
         }
 
-        $posts = $this->postsService->indexPaginated(10, $categoryID);
+        $posts = $this->postsService->indexPaginated(9, $categoryID);
 
         return view('blogetc::index', [
             'posts'            => $posts,

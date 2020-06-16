@@ -8,7 +8,7 @@
 <div class="contain justify-content-center">
     <img class="mainPic" src="{{ asset('images/bureau.jpg') }}" alt="">
     <div class="about-us-txt">
-      Nous somme une entreprise grenobloise qui participe a la mise en valeur de votre entreprise !
+      Nous sommes une entreprise grenobloise qui participe à la mise en valeur de votre entreprise !
       Grâce à notre expérience dans le numérique, et dans le marketing digital, couplé à notre réseaux,
       nous allons vous aider à créer votre propre réseau !
     <div class="someNumbers">
@@ -18,7 +18,7 @@
       </div>
       <div>
         <img class="logoStat" src="{{ asset('images/statup.png') }}">
-        <div>10 000 abonnées <br>en seulement <br>2 mois</div>
+        <div>10 000 abonnés <br>en seulement <br>2 mois</div>
       </div>
       <div>
         <img class="logoStat" src="{{ asset('images/money.png') }}">

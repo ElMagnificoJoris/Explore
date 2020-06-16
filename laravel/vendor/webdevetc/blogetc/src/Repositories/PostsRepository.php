@@ -43,7 +43,6 @@ class PostsRepository
                 $query->where('blog_etc_post_categories.blog_etc_category_id', $categoryID);
             })->get();
         }
-
         return $query->paginate($perPage);
     }
 
