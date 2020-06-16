@@ -105,7 +105,13 @@
                             <b>Désolé, mais il y a eu une erreur:</b>
                             <ul class='m-0'>
                                 @foreach($errors->all() as $error)
+                                 @if($error == 'The image large field is required.')
+                                    <li>Une image de couverture est obligatoire !</li>
+                                 @elseif($error == 'The post body field is required when use view file is not present.')
+                                    <li>Un contenu de post est obligatoire !</li>
+                                 @else
                                     <li>{{ $error }}</li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>

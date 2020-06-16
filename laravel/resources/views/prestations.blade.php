@@ -39,7 +39,7 @@
     </div>
     <div>
       <div>
-        Nous vous fournissons aussi les clés pour pouvoir créer votre propre site web profesionnel !
+        Nous vous fournissons aussi les clés pour pouvoir créer votre propre site web professionnel !
       </div>
       <img src="{{ asset('images/website.jpg') }}">
     </div>

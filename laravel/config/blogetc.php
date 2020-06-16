@@ -10,7 +10,7 @@ return [
 
     'use_custom_view_files' => false, // set to false to disable the use of being able to make blog posts include a view from resources/views/custom_blog_posts/*.blade.php. Default: false. Set to true to use this feature. Default: false
 
-    'per_page' => 10, // how many posts to show per page on the blog index page. Default: 10
+    'per_page' => 9, // how many posts to show per page on the blog index page. Default: 10
 
     'image_upload_enabled' => true, // true or false, if image uploading is allowed.
     'blog_upload_dir'      => 'blog_images', // this should be in public_path() (i.e. /public/blog_images), and should be writable
