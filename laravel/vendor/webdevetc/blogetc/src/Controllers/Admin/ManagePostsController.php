@@ -88,7 +88,7 @@ class ManagePostsController extends Controller
 
         $new_blog_post->categories()->sync($request->categories());
 
-        Helpers::flashMessage('Added post');
+        Helpers::flashMessage('Post ajouté');
         event(new BlogPostAdded($new_blog_post));
 
         return redirect($new_blog_post->editUrl());
@@ -166,7 +166,7 @@ class ManagePostsController extends Controller
         $post->save();
         $post->categories()->sync($request->categories());
 
-        Helpers::flashMessage('Updated post');
+        Helpers::flashMessage('Post mis à jour');
         event(new BlogPostEdited($post));
 
         return redirect($post->editUrl());

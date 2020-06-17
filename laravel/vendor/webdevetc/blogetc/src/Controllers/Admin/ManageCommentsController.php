@@ -58,7 +58,7 @@ class ManageCommentsController extends Controller
     {
         $this->service->approve($blogCommentID);
 
-        Helpers::flashMessage('Approved comment!');
+        Helpers::flashMessage('Commentaire approuvé!');
 
         return back();
     }
@@ -74,7 +74,7 @@ class ManageCommentsController extends Controller
     {
         $this->service->delete($blogCommentID);
 
-        Helpers::flashMessage('Deleted comment!');
+        Helpers::flashMessage('Commentaire supprimé!');
 
         return back();
     }

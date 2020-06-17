@@ -13,7 +13,7 @@ class SavedWebsiteController extends Controller
 
     public function __construct(SavedWebsiteRepository $savedWebsiteRepository)
     {
-        $this->middleware(UserHasAdminPrivileges::class); // we check if the user is authorised to be here
+        $this->middleware(UserHasAdminPrivileges::class); // we check if the current user is authorised to be here
 
         $this->savedWebsiteRepository = $savedWebsiteRepository;
     }

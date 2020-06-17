@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'admin'
     ];
 
     /**
@@ -47,25 +48,8 @@ class User extends Authenticatable
      */
     public function canManageBlogEtcPosts()
     {
-        // Enter the logic needed for your app.
-        // Maybe you can just hardcode in a user id that you
-        //   know is always an admin ID?
-
-        if (
-            $this->id === 1
-            && $this->email === "your_admin_user@your_site.com"
-        ) {
-
-            // return true so this user CAN edit/post/delete
-            // blog posts (and post any HTML/JS)
-
-            return true;
-        }
-
-        // otherwise return false, so they have no access
-        // to the admin panel (but can still view posts)
-
-        return true;
+        // any admin user can manage posts
+        return $this->isAdmin();
     }
 
     /**
@@ -77,8 +61,8 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        if ($this->email === "flav38320@gmail.com")
+        if ($this->admin == 1)
             return true;
-        return true;
+        return false;
     }
 }

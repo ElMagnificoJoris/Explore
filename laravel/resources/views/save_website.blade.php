@@ -19,6 +19,22 @@
 						{!! Form::submit('Ajouter', ['class' => 'btn btn-info pull-right']) !!}
 					{!! Form::close() !!}
 				</div>
+				</div>
+
+				@if(count(DB::table('savedwebsites')->get()) != 0)
+					<hr>
+					<div class="panel-heading">Supprimer un site</div> <br>
+					<div class="panel-body">
+						<div style="display:flex;">
+							@foreach (DB::table('savedwebsites')->get() as $savedwebsite)
+								{!! Form::open(['method' => 'DELETE', 'route' => ['delete_website', $savedwebsite->name]]) !!}
+									{!! Form::submit($savedwebsite->name, ['class' => 'btn btn-danger', 'style' => 'margin-right: 15px;']) !!}
+								{!! Form::close() !!}
+							@endforeach
+						</div>
+					</div>
+					</div>
+				@endif
 			</div>
 		</div>
 	</div>
