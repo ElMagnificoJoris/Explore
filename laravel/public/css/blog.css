@@ -1,3 +1,7 @@
+.blognav{
+  color: #3498DB;
+}
+
 .postRow{
   display: flex;
   flex-direction: row;

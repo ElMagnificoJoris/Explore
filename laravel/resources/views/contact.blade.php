@@ -1,5 +1,9 @@
 @extends("layouts.app",['title'=>"laravel"])
 
+@push('styles')
+    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="contain">
 		<div class="col-sm-offset-4 col-sm-4">

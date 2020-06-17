@@ -73,11 +73,11 @@
                         </li>
                         <li class="nav-item">
                             @if(!Auth::check() || (Auth::check() && !Auth::user()->isAdmin()))
-                                <a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a>
+                                <a class="navl contactnav" href="{{ route('contact') }}">{{ __('Contact') }}</a>
                             @endif
                         </li>
                         <li class="nav-item">
-                            <a class="navl" href="{{ route('blogetc.index') }}">{{ __('Blogs') }}</a>
+                            <a class="navl blognav" href="{{ route('blogetc.index') }}">{{ __('Blogs') }}</a>
                         </li>
                         @guest
                             <li class="nav-item">
