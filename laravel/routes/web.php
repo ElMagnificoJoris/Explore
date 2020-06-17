@@ -28,6 +28,8 @@ Route::get('/nous', 'MainController@about')->name('nous');
 
 Route::get('/prestations', 'MainController@presta')->name('prestations');
 
+Route::resource('users', 'UserController');
+
 Route::get('save_website', 'SavedWebsiteController@getForm')->name('save_website');
 Route::get('save_website/{name}', function(){ return redirect()->route('save_website'); });
 Route::post('save_website', 'SavedWebsiteController@postForm')->name('store_website');

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Explore') }}</title>
+    <title> Explore </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -42,27 +42,28 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @if(\Auth::check() && \Auth::user()->isAdmin())
+                        @if(Auth::check() && Auth::user()->isAdmin())
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle nav-admin" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Sites <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <hr style="margin: 0px;">
                                     @foreach (DB::table('savedwebsites')->get() as $savedwebsite)
                                         <a class="dropdown-item" href="{!! $savedwebsite->link !!}" target="_blank">
                                             {!! $savedwebsite->name !!}
                                         </a>
-
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['delete_website', $savedwebsite->name]]) !!}
-                                            {!! Form::submit('-supprimer-'.' '.$savedwebsite->name, ['class' => 'dropdown-item']) !!}
-                                        {!! Form::close() !!}
+                                        <hr style="margin: 0px;">
                                     @endforeach
-                                    <a class="dropdown-item" href="{{ route('save_website') }}">
-                                        {{ __('-Rajouter un site-') }}
+                                    <hr style="margin: 10px 0px 0px 0px;">
+                                    <a class="dropdown-item" href="{{ route('save_website') }}" style="margin-top: 10px;">
+                                        {{ __('-Gérer les sites-') }}
                                     </a>
                                 </div>
                             </li>
+                            <a class="nav-link nav-admin" href="{{ route('contact_admin') }}">{{ __('Contacts') }}</a>
+                            <a class="nav-link nav-admin" href="{{ route('users.index') }}">{{ __('Utilisateurs') }}</a>
                         @endif
                         <li class="nav-item">
                             <a class="navl about" href="{{ route('nous') }}">{{ __('Qui sommes nous ?') }}</a>
@@ -71,10 +72,8 @@
                             <a class="navl prestaTitle" href="{{ route('prestations') }}">{{ __('Prestations') }}</a>
                         </li>
                         <li class="nav-item">
-                            @if(\Auth::check() && \Auth::user()->isAdmin())
-                                <a class="nav-link" href="{{ route('contact_admin') }}">{{ __('Voir les contacts') }}</a>
-                            @else
-                            <a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a>
+                            @if(!Auth::check() || (Auth::check() && !Auth::user()->isAdmin()))
+                                <a class="nav-link" href="{{ route('contact') }}">{{ __('Contact') }}</a>
                             @endif
                         </li>
                         <li class="nav-item">
@@ -90,7 +89,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="navl dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} @if(Auth::check() && Auth::user()->isAdmin()) <span class="nav-admin">(Admin)</span> @endif <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

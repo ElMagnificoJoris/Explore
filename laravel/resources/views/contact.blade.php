@@ -6,7 +6,7 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">Vous contacter</div>
 				<div class="panel-body">
-                    Pour que l'on vous contacte, veuillez remplir ce formulaire:
+                    Pour que l'on puisse vous contacter, veuillez remplir ce formulaire: <br> <br>
 
 					{!! Form::open(['route' => 'contact']) !!}
 						@csrf

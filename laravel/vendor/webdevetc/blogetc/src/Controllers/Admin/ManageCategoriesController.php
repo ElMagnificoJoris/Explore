@@ -60,7 +60,7 @@ class ManageCategoriesController extends Controller
     {
         $this->service->create($request->validated());
 
-        Helpers::flashMessage('Saved new category');
+        Helpers::flashMessage('Nouvelle catégorie sauvegardée');
 
         return redirect(route('blogetc.admin.categories.index'));
     }
@@ -121,7 +121,7 @@ class ManageCategoriesController extends Controller
     {
         $category = $this->service->update($categoryID, $request->validated());
 
-        Helpers::flashMessage('Updated category');
+        Helpers::flashMessage('Changements sauvegardés');
 
         return redirect($category->editUrl());
     }

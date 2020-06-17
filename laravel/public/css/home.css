@@ -197,3 +197,12 @@ main div div .logoInf img{
   margin-right: auto;
   display: block;
 }
+
+.nav-admin{
+  color: lightskyblue !important;
+}
+
+.nav-admin:hover{
+  color: deepskyblue !important;
+  text-decoration: underline !important;
+}
