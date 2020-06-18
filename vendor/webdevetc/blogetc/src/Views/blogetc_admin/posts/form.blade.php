@@ -135,7 +135,7 @@
                 display: none;
             }
         </style>
-        <h4>Images</h4>
+        <h4>Images de couverture</h4>
 
 
         @foreach(config("blogetc.image_sizes") as $size_key =>$size_info)
