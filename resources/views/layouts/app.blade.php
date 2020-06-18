@@ -81,10 +81,10 @@
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="navl" href="{{ route('login') }}">{{ __('Connexion') }}</a>
+                                <a class="navl connexnav" href="{{ route('login') }}">{{ __('Connexion') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Inscription') }}</a>
+                                <a class="navl inscrinav" href="{{ route('register') }}">{{ __('Inscription') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
